@@ -107,6 +107,27 @@ $(function () {
         }
     })
 
+    $("#invite_button").click(function () {
+        const to = prompt("Enter your email address: ")
+        let data = {
+            url: window.location.href,
+            to: to
+        }
+        $.ajax({
+            url: "/send-mail",
+            type: "post",
+            data: JSON.stringify(data),
+            dataType: "json",
+            contentType: "application/json",
+            success: function(result){
+                alert("Sent!")
+            },
+            error: function(result){
+                alert(result.responseJSON)
+            }
+        })
+    })
+
 })
 
 peer.on("open", (id) => {
